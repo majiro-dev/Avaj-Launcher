@@ -1,11 +1,7 @@
-// 
-
 package avaj.sources;
 
 
-
-
-public class WeatherTower
+public class WeatherTower extends Tower
 {
 
     public String getWeather(Coordinates coordinates)
