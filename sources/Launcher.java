@@ -24,6 +24,13 @@ public class Launcher {
         try 
         {
             reader = new BufferedReader(new FileReader(scenarioFile));
+            
+            File outputFolder = new File("output");
+            if (!outputFolder.exists()) 
+            {
+                outputFolder.mkdir();
+            }
+
             writer = new PrintWriter(new FileWriter("output/simulation.txt"));
 
             writer.println("test");
@@ -34,7 +41,7 @@ public class Launcher {
 
         catch (IOException e) 
         {
-            System.out.println("Error: Could not write to file: output/simulation.txt");
+            System.out.println("Error: " + e.getMessage());
             return;
         }
         
