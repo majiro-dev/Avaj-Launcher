@@ -7,6 +7,9 @@
 package avaj.sources;
 
 import java.io.*;
+import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Launcher {
     public static void main(String[] args) 
@@ -33,7 +36,15 @@ public class Launcher {
 
             writer = new PrintWriter(new FileWriter("output/simulation.txt"));
 
-            writer.println("test");
+            WeatherTower weatherTower = new WeatherTower();
+            List<Flyable> aircrafts = readScenario(reader);
+
+            for (Flyable aircraft : aircrafts) 
+            {
+                aircraft.registerTower(weatherTower);
+            }
+
+
 
             reader.close();
             writer.close();
@@ -46,4 +57,46 @@ public class Launcher {
         }
         
     }
+
+    private static List<Flyable> readScenario(BufferedReader reader) throws IOException 
+    {
+        List<Flyable> aircrafts = new ArrayList<>();
+        String line;
+        long id = 0;
+        while ((line = reader.readLine()) != null) 
+        {
+            String[] parts = line.split(" ");
+            if (parts.length == 5) 
+            {
+                String type = parts[0];
+                String name = parts[1];
+                int longitude = Integer.parseInt(parts[2]);
+                int latitude = Integer.parseInt(parts[3]);
+                int height = Integer.parseInt(parts[4]);
+                Flyable aircraft = createAircraft(type, name, longitude, latitude, height, id++);
+                aircrafts.add(aircraft);
+            }
+        }
+        return aircrafts;
+    }
+
+    private static Flyable createAircraft(String type, String name, int longitude, int latitude, int height, long id)
+    {
+        Coordinates coordinates = new Coordinates(longitude, latitude, height);
+        Flyable aircraft = null;
+        switch (type) 
+        {
+            case "Baloon":
+                aircraft = new Baloon(id, name, coordinates);
+                break;
+            case "JetPlane":
+                aircraft = new JetPlane(id, name, coordinates);
+                break;
+            case "Helicopter":
+                aircraft = new Helicopter(id, name, coordinates);
+                break;
+        }
+        return aircraft;
+    }
+
 }
