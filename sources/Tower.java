@@ -8,11 +8,13 @@ public class Tower
     public void register(Flyable flyable)
     {
         observers.add(flyable);
+        // write message to output file
     }
 
     public void unregister(Flyable flyable)
     {
         observers.remove(flyable);
+        // write message to output file
     }
 
     protected void conditionsChanged()

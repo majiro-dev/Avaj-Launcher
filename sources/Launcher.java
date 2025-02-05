@@ -11,7 +11,12 @@ import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Launcher {
+
+
+
+public class Launcher 
+{
+    public static final String OUTPUT_FILE = "output/simulation.txt";
     public static void main(String[] args) 
     {
         if (args.length != 1) 
@@ -44,7 +49,12 @@ public class Launcher {
                 aircraft.registerTower(weatherTower);
             }
 
+            int simulations = 10;
 
+            for (int i = 0; i < simulations; i++) 
+            {
+                weatherTower.changeWeather();
+            }
 
             reader.close();
             writer.close();
