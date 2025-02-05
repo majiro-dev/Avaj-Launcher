@@ -2,7 +2,8 @@
 SCENARIO:=scenario.txt
 
 all:
-	javac -d . sources/*.java
+	find * -name "*.java" > sources.txt
+	javac @sources.txt
 
 clean:
 	rm -rf output/*
@@ -10,6 +11,7 @@ clean:
 fclean: clean
 	rm -rf avaj/*.class
 	rm -rf avaj
+	rm -rf sources.txt
 
 run:
 	java avaj.sources.Launcher scenarios/$(SCENARIO)
