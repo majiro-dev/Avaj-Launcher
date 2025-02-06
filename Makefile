@@ -11,6 +11,7 @@ clean:
 fclean: clean
 	rm -rf avaj/*.class
 	rm -rf avaj
+	rm -rf sources/*.class
 	rm -rf sources.txt
 
 run:
