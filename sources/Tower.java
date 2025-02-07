@@ -8,7 +8,7 @@ public class Tower
     public void register(Flyable flyable)
     {
         observers.add(flyable);
-        // write message to output file
+        Launcher.printToOutput("Tower says: " + flyable + " registered to weather tower.");
     }
 
     public void unregister(Flyable flyable)

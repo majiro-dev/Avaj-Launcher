@@ -39,8 +39,6 @@ public class Launcher
                 outputFolder.mkdir();
             }
 
-            writer = new PrintWriter(new FileWriter("output/simulation.txt"));
-
             WeatherTower weatherTower = new WeatherTower();
             List<Flyable> aircrafts = readScenario(reader);
 
@@ -57,7 +55,6 @@ public class Launcher
             }
 
             reader.close();
-            writer.close();
         }
 
         catch (IOException e) 
@@ -107,6 +104,14 @@ public class Launcher
                 break;
         }
         return aircraft;
+    }
+
+    public void printToOutput(String s, boolean append)
+    {
+        //appends s to the file
+        writer = new PrintWriter(new FileWriter("output/simulation.txt", append));
+        writer.println(s);
+        writer.close();
     }
 
 }
