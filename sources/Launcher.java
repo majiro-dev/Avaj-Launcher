@@ -106,12 +106,18 @@ public class Launcher
         return aircraft;
     }
 
-    public void printToOutput(String s, boolean append)
+    static public void printToOutput(String s, boolean append)
     {
         //appends s to the file
-        writer = new PrintWriter(new FileWriter("output/simulation.txt", append));
-        writer.println(s);
-        writer.close();
+
+
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("output/simulation.txt", append));
+            writer.println(s);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
     }
 
 }
