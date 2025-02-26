@@ -69,7 +69,7 @@ public class Launcher
     {
         List<Flyable> aircrafts = new ArrayList<>();
         String line;
-        long id = 0;
+        AircraftFactory factory = AircraftFactory.getInstance();
         while ((line = reader.readLine()) != null) 
         {
             String[] parts = line.split(" ");
@@ -80,30 +80,12 @@ public class Launcher
                 int longitude = Integer.parseInt(parts[2]);
                 int latitude = Integer.parseInt(parts[3]);
                 int height = Integer.parseInt(parts[4]);
-                Flyable aircraft = createAircraft(type, name, longitude, latitude, height, id++);
+                Coordinates coordinates = new Coordinates(longitude, latitude, height);
+                Flyable aircraft = factory.newAircraft(type, name, coordinates);
                 aircrafts.add(aircraft);
             }
         }
         return aircrafts;
-    }
-
-    private static Flyable createAircraft(String type, String name, int longitude, int latitude, int height, long id)
-    {
-        Coordinates coordinates = new Coordinates(longitude, latitude, height);
-        Flyable aircraft = null;
-        switch (type) 
-        {
-            case "Baloon":
-                aircraft = new Baloon(id, name, coordinates);
-                break;
-            case "JetPlane":
-                aircraft = new JetPlane(id, name, coordinates);
-                break;
-            case "Helicopter":
-                aircraft = new Helicopter(id, name, coordinates);
-                break;
-        }
-        return aircraft;
     }
 
     static public void printToOutput(String s, boolean append)

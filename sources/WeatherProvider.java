@@ -9,7 +9,7 @@ public class WeatherProvider
 
     private WeatherProvider() {}
 
-    public static WeatherProvider getProvider()
+    public static WeatherProvider getInstance()
     {
         return weatherProvider;
     }
