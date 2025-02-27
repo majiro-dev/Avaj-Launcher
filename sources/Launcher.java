@@ -1,18 +1,9 @@
-// this is the main class that will run the simulation
-// it will read the file and create the aircrafts and the tower
-// it will then run the simulation and write the output to a file
-// the file will be named simulation.txt and will be created in the output folder
-// if the file already exists it will be overwritten
-
 package avaj.sources;
 
 import java.io.*;
 import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 public class Launcher 
 {
@@ -91,7 +82,6 @@ public class Launcher
     static public void printToOutput(String s, boolean append)
     {
         //appends s to the file
-
 
         try {
             PrintWriter writer = new PrintWriter(new FileWriter("output/simulation.txt", append));
