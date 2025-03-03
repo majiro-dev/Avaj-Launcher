@@ -1,20 +1,19 @@
 package avaj.sources;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Tower 
 {
-    private List<Flyable> observers;
+    private List<Flyable> observers = new ArrayList<Flyable>();
     
     public void register(Flyable flyable)
     {
         observers.add(flyable);
-        Launcher.printToOutput("Tower says: " , true);
     }
 
     public void unregister(Flyable flyable)
     {
         observers.remove(flyable);
-        // write message to output file
     }
 
     protected void conditionsChanged()

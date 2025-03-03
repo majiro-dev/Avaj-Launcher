@@ -11,6 +11,6 @@ public class WeatherTower extends Tower
 
     public void changeWeather()
     {
-        // this will change the weather for all the aircrafts
+        this.conditionsChanged();
     }
 }
