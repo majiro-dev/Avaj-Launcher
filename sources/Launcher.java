@@ -8,6 +8,9 @@ import java.util.List;
 public class Launcher 
 {
     public static final String OUTPUT_FILE = "output/simulation.txt";
+    private static int simulations = 0;
+    private static WeatherTower weatherTower;
+
     public static void main(String[] args) 
     {
         if (args.length != 1) 
@@ -18,7 +21,6 @@ public class Launcher
 
         String scenarioFile = args[0];
         BufferedReader reader = null;
-        PrintWriter writer = null;
 
         try 
         {
@@ -30,15 +32,7 @@ public class Launcher
                 outputFolder.mkdir();
             }
 
-            WeatherTower weatherTower = new WeatherTower();
-            List<Flyable> aircrafts = readScenario(reader);
-
-            for (Flyable aircraft : aircrafts) 
-            {
-                aircraft.registerTower(weatherTower);
-            }
-
-            int simulations = 10;
+            readScenario(reader);
 
             for (int i = 0; i < simulations; i++) 
             {
@@ -56,11 +50,11 @@ public class Launcher
         
     }
 
-    private static List<Flyable> readScenario(BufferedReader reader) throws IOException 
+    private static void readScenario(BufferedReader reader) throws IOException 
     {
-        List<Flyable> aircrafts = new ArrayList<>();
         String line;
         AircraftFactory factory = AircraftFactory.getInstance();
+        weatherTower = new WeatherTower();
         while ((line = reader.readLine()) != null) 
         {
             String[] parts = line.split(" ");
@@ -73,10 +67,13 @@ public class Launcher
                 int height = Integer.parseInt(parts[4]);
                 Coordinates coordinates = new Coordinates(longitude, latitude, height);
                 Flyable aircraft = factory.newAircraft(type, name, coordinates);
-                aircrafts.add(aircraft);
+                aircraft.registerTower(weatherTower);
+            }
+            else if (parts.length == 1) 
+            {
+                simulations = Integer.parseInt(parts[0]);
             }
         }
-        return aircrafts;
     }
 
     static public void printToOutput(String s, boolean append)
