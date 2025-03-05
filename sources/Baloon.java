@@ -34,6 +34,7 @@ public class Baloon extends Aircraft
         }
     
         //Logger.log(message);
+        Launcher.printToOutput(message, true);
 
         if (coordinates.getHeight() <= 0)
         {
@@ -42,6 +43,7 @@ public class Baloon extends Aircraft
             message += "Tower says: Baloon#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
             //Logger.log(message);
+            Launcher.printToOutput(message, true);
         }
     }
 }

@@ -34,6 +34,7 @@ public class JetPlane extends Aircraft
         }
 
         // Logger.log(message);
+        Launcher.printToOutput(message, true);
 
         if (coordinates.getHeight() <= 0)
         {
@@ -42,6 +43,7 @@ public class JetPlane extends Aircraft
             weatherTower.unregister(this);
             message += "Tower says: JetPlane#" + name + "(" + id + ") unregistered from weather tower.";
             // Logger.log(message);
+            Launcher.printToOutput(message, true);
         }
 
     }

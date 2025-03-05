@@ -2,13 +2,11 @@ package avaj.sources;
 
 import java.io.*;
 import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Launcher 
 {
     public static final String OUTPUT_FILE = "output/simulation.txt";
-    private static int simulations = 0;
+    private static int simulations;
     private static WeatherTower weatherTower;
 
     public static void main(String[] args) 
@@ -21,6 +19,9 @@ public class Launcher
 
         String scenarioFile = args[0];
         BufferedReader reader = null;
+
+        printToOutput("", false);
+        printToOutput("Hola holita vecinito", true);
 
         try 
         {
@@ -81,7 +82,7 @@ public class Launcher
         //appends s to the file
 
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter("output/simulation.txt", append));
+            PrintWriter writer = new PrintWriter(new FileWriter(OUTPUT_FILE, append));
             writer.println(s);
             writer.close();
         } catch (IOException e) {
