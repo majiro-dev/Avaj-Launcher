@@ -33,7 +33,9 @@ public class Baloon extends Aircraft
                 break;
         }
     
-        //Logger.log(message);
+        if (coordinates.getHeight() > 100)
+            coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), 100);
+
         Launcher.printToOutput(message, true);
 
         if (coordinates.getHeight() <= 0)
@@ -42,7 +44,6 @@ public class Baloon extends Aircraft
             message += "landing.";
             message += "Tower says: Baloon#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
-            //Logger.log(message);
             Launcher.printToOutput(message, true);
         }
     }
