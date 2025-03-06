@@ -1,7 +1,6 @@
 package avaj.sources;
 
 import java.io.*;
-import java.nio.Buffer;
 
 public class Launcher 
 {
@@ -69,7 +68,7 @@ public class Launcher
                 Flyable aircraft = factory.newAircraft(type, name, coordinates);
                 aircraft.registerTower(weatherTower);
             }
-            else if (parts.length == 1) 
+            else if (parts.length == 1 && parts[0].matches("\\d+")) 
             {
                 simulations = Integer.parseInt(parts[0]);
             }
@@ -78,8 +77,6 @@ public class Launcher
 
     static public void printToOutput(String s, boolean append)
     {
-        //appends s to the file
-
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(OUTPUT_FILE, append));
             writer.println(s);
