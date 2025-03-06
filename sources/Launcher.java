@@ -17,28 +17,23 @@ public class Launcher
             System.out.println("Usage: java Launcher <scenario file path>");
             return;
         }
-
+        
         String scenarioFile = args[0];
         BufferedReader reader = null;
-
-        printToOutput("", false);
 
         try 
         {
             reader = new BufferedReader(new FileReader(scenarioFile));
-            
+            if (!readScenario(reader)) 
+                return;
+        
             File outputFolder = new File("output");
             if (!outputFolder.exists()) 
-            {
                 outputFolder.mkdir();
-            }
-
-            readScenario(reader);
+            printToOutput("", false);
 
             for (int i = 0; i < simulations; i++) 
-            {
                 weatherTower.changeWeather();
-            }
 
             reader.close();
         }
@@ -48,10 +43,9 @@ public class Launcher
             System.out.println("Error: " + e.getMessage());
             return;
         }
-        
     }
 
-    private static void readScenario(BufferedReader reader) throws IOException 
+    private static boolean readScenario(BufferedReader reader) throws IOException 
     {
         String line;
         AircraftFactory factory = AircraftFactory.getInstance();
@@ -63,7 +57,7 @@ public class Launcher
             if (lineCount == 0 && !line.matches("\\d+")) 
             {
                 System.out.println("First line must be a positive integer");
-                return;
+                return false;
             }
             else if (lineCount == 0) 
             {
@@ -77,12 +71,12 @@ public class Launcher
                 if (!parts[0].matches("Baloon|JetPlane|Helicopter")) 
                 {
                     System.out.println("Invalid aircraft type: " + parts[0]);
-                    return;
+                    return false;
                 }
                 if (!parts[2].matches("\\d+") || !parts[3].matches("\\d+") || !parts[4].matches("\\d+")) 
                 {
                     System.out.println("Invalid coordinates: " + parts[2] + ", " + parts[3] + ", " + parts[4]);
-                    return;
+                    return false;
                 }
                 String type = parts[0];
                 String name = parts[1];
@@ -96,7 +90,7 @@ public class Launcher
             else 
             {
                 System.out.println("Invalid line: " + line);
-                return;
+                return false;
             }
         }
 
@@ -104,6 +98,7 @@ public class Launcher
         {
             aircraft.registerTower(weatherTower);
         }
+        return true;
     }
 
     static public void printToOutput(String s, boolean append)
