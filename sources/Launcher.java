@@ -17,7 +17,7 @@ public class Launcher
             System.out.println("Usage: java Launcher <scenario file path>");
             return;
         }
-        
+
         String scenarioFile = args[0];
         BufferedReader reader = null;
 
@@ -30,7 +30,6 @@ public class Launcher
             File outputFolder = new File("output");
             if (!outputFolder.exists()) 
                 outputFolder.mkdir();
-            printToOutput("", false);
 
             for (int i = 0; i < simulations; i++) 
                 weatherTower.changeWeather();

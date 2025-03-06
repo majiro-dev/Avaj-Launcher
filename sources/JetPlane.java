@@ -17,19 +17,19 @@ public class JetPlane extends Aircraft
         {
             case "SUN":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 10, coordinates.getHeight() + 2);
-                message += "This is hot.";
+                message += "This is the hottest day in the history of hot days!";
                 break;
             case "RAIN":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 5, coordinates.getHeight());
-                message += "It's raining. Better watch out for lightings.";
+                message += "The rain will cleanse the world of its sins.";
                 break;
             case "FOG":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude() + 1, coordinates.getHeight());
-                message += "I can't see anything.";
+                message += "In the fog, you never know what's coming.";
                 break;
             case "SNOW":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 7);
-                message += "My rotor is going to freeze!";
+                message += "The snow is falling, and so are my spirits.";
                 break;
         }
 

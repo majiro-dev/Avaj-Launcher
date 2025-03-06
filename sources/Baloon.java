@@ -17,19 +17,19 @@ public class Baloon extends Aircraft
         {
             case "SUN":
                 coordinates = new Coordinates(coordinates.getLongitude() + 2, coordinates.getLatitude(), coordinates.getHeight() + 4);
-                message += "This is hot.";
+                message += "I'm melting! Melting!";
                 break;
             case "RAIN":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 5);
-                message += "It's raining. Better watch out for lightings.";
+                message += "I'm singing in the rain, just singing in the rain!";
                 break;
             case "FOG":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 3);
-                message += "I can't see anything.";
+                message += "The fog is so thick, it feels like another world.";
                 break;
             case "SNOW":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 15);
-                message += "My rotor is going to freeze!";
+                message += "The cold never bothered me anyway.";
                 break;
         }
     

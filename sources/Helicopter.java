@@ -17,19 +17,19 @@ public class Helicopter extends Aircraft
         {
             case "SUN":
                 coordinates = new Coordinates(coordinates.getLongitude() + 10, coordinates.getLatitude(), coordinates.getHeight() + 2);
-                message += "This is hot.";
+                message += "The sun is a deadly laser.";
                 break;
             case "RAIN":
                 coordinates = new Coordinates(coordinates.getLongitude() + 5, coordinates.getLatitude(), coordinates.getHeight());
-                message += "It's raining. Better watch out for lightings.";
+                message += "The rain is here to wash away the past.";
                 break;
             case "FOG":
                 coordinates = new Coordinates(coordinates.getLongitude() + 1, coordinates.getLatitude(), coordinates.getHeight());
-                message += "I can't see anything.";
+                message += "I can't see a thing in this fog!";
                 break;
             case "SNOW":
                 coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), coordinates.getHeight() - 12);
-                message += "My rotor is going to freeze!";
+                message += "Winter is coming.";
                 break;
         }
 
