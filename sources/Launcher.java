@@ -21,7 +21,6 @@ public class Launcher
         BufferedReader reader = null;
 
         printToOutput("", false);
-        printToOutput("Hola holita vecinito", true);
 
         try 
         {
