@@ -40,12 +40,21 @@ public class Helicopter extends Aircraft
 
         if (coordinates.getHeight() <= 0)
         {
-            message = "Helicopter#" + name + "(" + id + "): ";
-            message += "landing.";
+            message = "Helicopter#" + name + "(" + id + "): " + "landing.";
+            Launcher.printToOutput(message, true);
+            message = "Tower says: Helicopter#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
-            message += "Tower says: Helicopter#" + name + "(" + id + ") unregistered from weather tower.";
             Launcher.printToOutput(message, true);
         }
 
+    }
+
+    @Override
+    public void registerTower(WeatherTower weatherTower)
+    {
+        this.weatherTower = weatherTower;
+        weatherTower.register(this);
+        String message = "Tower says: Helicopter#" + name + "(" + id + ") registered to weather tower.";
+        Launcher.printToOutput(message, true);
     }
 }

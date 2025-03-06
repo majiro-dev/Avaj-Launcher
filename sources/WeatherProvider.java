@@ -17,6 +17,10 @@ public class WeatherProvider
     public String getCurrentWeather(Coordinates coordinates)
     {
         int sum = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+        sum = sum - (int)(Math.random() * 25);
+        if (sum < 0)
+            sum = 0;
         return weather[sum % 4];
+        
     }
 }

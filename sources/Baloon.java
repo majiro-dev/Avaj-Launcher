@@ -40,11 +40,20 @@ public class Baloon extends Aircraft
 
         if (coordinates.getHeight() <= 0)
         {
-            message = "Baloon#" + name + "(" + id + "): ";
-            message += "landing.";
-            message += "Tower says: Baloon#" + name + "(" + id + ") unregistered from weather tower.";
+            message = "Baloon#" + name + "(" + id + "): " + "landing.";
+            Launcher.printToOutput(message, true);
+            message = "Tower says: Baloon#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
             Launcher.printToOutput(message, true);
         }
+    }
+
+    @Override
+    public void registerTower(WeatherTower weatherTower)
+    {
+        this.weatherTower = weatherTower;
+        weatherTower.register(this);
+        String message = "Tower says: Baloon#" + name + "(" + id + ") registered to weather tower.";
+        Launcher.printToOutput(message, true);
     }
 }

@@ -40,12 +40,21 @@ public class JetPlane extends Aircraft
 
         if (coordinates.getHeight() <= 0)
         {
-            message = "JetPlane#" + name + "(" + id + "): ";
-            message += "landing.";
+            message = "JetPlane#" + name + "(" + id + "): " + "landing.";
+            Launcher.printToOutput(message, true);
+            message = "Tower says: JetPlane#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
-            message += "Tower says: JetPlane#" + name + "(" + id + ") unregistered from weather tower.";
             Launcher.printToOutput(message, true);
         }
 
+    }
+
+    @Override
+    public void registerTower(WeatherTower weatherTower)
+    {
+        this.weatherTower = weatherTower;
+        weatherTower.register(this);
+        String message = "Tower says: JetPlane#" + name + "(" + id + ") registered to weather tower.";
+        Launcher.printToOutput(message, true);
     }
 }
