@@ -18,3 +18,8 @@ Avaj Launcher is a Java-based simulation program that models the movement of var
 - **File-Based Input/Output**:
   - Reads simulation scenarios from an input file.
   - Logs simulation results to `simulation.txt`.
+
+## Usage
+- **Make** to compile.
+- **Make run** to use launch with the scenario located at `scenarios/scenario.txt`.
+- **Make fclean** to remove compilation and output files.
