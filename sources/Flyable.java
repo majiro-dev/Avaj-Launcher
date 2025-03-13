@@ -5,7 +5,7 @@ public abstract class Flyable
 {
     protected WeatherTower weatherTower;
 
-    abstract public void updateConditions();
+    public abstract void updateConditions();
     
     public void registerTower(WeatherTower weatherTower)
     {

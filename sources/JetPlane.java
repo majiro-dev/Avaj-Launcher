@@ -11,8 +11,7 @@ public class JetPlane extends Aircraft
     public void updateConditions()
     {
         String weather = weatherTower.getWeather(coordinates);
-        String message = "JetPlane#" + name + "(" + id + "): ";
-
+        String message = this.getClass().getSimpleName() + "#" + name + "(" + id + "): ";
         switch (weather)
         {
             case "SUN":
@@ -32,29 +31,7 @@ public class JetPlane extends Aircraft
                 message += "The snow is falling, and so are my spirits.";
                 break;
         }
-
-        if (coordinates.getHeight() > 100)
-            coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), 100);
-            
         Launcher.printToOutput(message, true);
-
-        if (coordinates.getHeight() <= 0)
-        {
-            message = "JetPlane#" + name + "(" + id + "): " + "landing.";
-            Launcher.printToOutput(message, true);
-            message = "Tower says: JetPlane#" + name + "(" + id + ") unregistered from weather tower.";
-            weatherTower.unregister(this);
-            Launcher.printToOutput(message, true);
-        }
-
-    }
-
-    @Override
-    public void registerTower(WeatherTower weatherTower)
-    {
-        this.weatherTower = weatherTower;
-        weatherTower.register(this);
-        String message = "Tower says: JetPlane#" + name + "(" + id + ") registered to weather tower.";
-        Launcher.printToOutput(message, true);
+        coordinatesCheck();
     }
 }

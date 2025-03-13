@@ -11,8 +11,7 @@ public class Baloon extends Aircraft
     public void updateConditions()
     {
         String weather = weatherTower.getWeather(coordinates);
-        String message = "Baloon#" + name + "(" + id + "): ";
-
+        String message = this.getClass().getSimpleName() + "#" + name + "(" + id + "): ";
         switch (weather)
         {
             case "SUN":
@@ -32,28 +31,7 @@ public class Baloon extends Aircraft
                 message += "The cold never bothered me anyway.";
                 break;
         }
-    
-        if (coordinates.getHeight() > 100)
-            coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), 100);
-
         Launcher.printToOutput(message, true);
-
-        if (coordinates.getHeight() <= 0)
-        {
-            message = "Baloon#" + name + "(" + id + "): " + "landing.";
-            Launcher.printToOutput(message, true);
-            message = "Tower says: Baloon#" + name + "(" + id + ") unregistered from weather tower.";
-            weatherTower.unregister(this);
-            Launcher.printToOutput(message, true);
-        }
-    }
-
-    @Override
-    public void registerTower(WeatherTower weatherTower)
-    {
-        this.weatherTower = weatherTower;
-        weatherTower.register(this);
-        String message = "Tower says: Baloon#" + name + "(" + id + ") registered to weather tower.";
-        Launcher.printToOutput(message, true);
+        coordinatesCheck();
     }
 }
