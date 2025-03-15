@@ -31,12 +31,10 @@ public class Launcher
             if (!outputFolder.exists()) 
                 outputFolder.mkdir();
 
-            for (int i = 0; i <= simulations; i++) 
+            for (int i = 0; i < simulations; i++) 
                 weatherTower.changeWeather();
 
             reader.close();
-
-            System.out.println("Simulation complete. Output written to " + OUTPUT_FILE);
         }
 
         catch (IOException e) 
