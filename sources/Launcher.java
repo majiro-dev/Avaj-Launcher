@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Launcher 
 {
-    public static final String OUTPUT_FILE = "output/simulation.txt";
+    private static final String OUTPUT_FILE = "output/simulation.txt";
     private static int simulations;
     private static WeatherTower weatherTower;
 
@@ -48,8 +48,9 @@ public class Launcher
     {
         String line;
         List <Flyable> flyables = new ArrayList<Flyable>();
-        weatherTower = new WeatherTower();
         int lineCount = 0;
+        weatherTower = new WeatherTower();
+        AircraftFactory aircraftFactory = AircraftFactory.getInstance();
         while ((line = reader.readLine()) != null) 
         {
             if (lineCount == 0 && !line.matches("\\d+")) 
@@ -82,7 +83,7 @@ public class Launcher
                 int latitude = Integer.parseInt(parts[3]);
                 int height = Integer.parseInt(parts[4]);
                 Coordinates coordinates = new Coordinates(longitude, latitude, height);
-                Flyable aircraft = AircraftFactory.newAircraft(type, name, coordinates);
+                Flyable aircraft = aircraftFactory.newAircraft(type, name, coordinates);
                 flyables.add(aircraft);
             }
             else 
@@ -99,7 +100,7 @@ public class Launcher
         return true;
     }
 
-    static public void printToOutput(String s, boolean append)
+    public static void printToOutput(String s, boolean append)
     {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(OUTPUT_FILE, append));

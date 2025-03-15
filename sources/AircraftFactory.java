@@ -2,9 +2,22 @@ package avaj.sources;
 
 public class AircraftFactory 
 {
-    private static long id_counter = 0;
+    long id_counter = 0;
 
-    public static Flyable newAircraft(String type, String name, Coordinates coordinates) 
+    private static AircraftFactory instance;
+
+    private AircraftFactory() {}
+
+    public static AircraftFactory getInstance() 
+    {
+        if (instance == null) 
+        {
+            instance = new AircraftFactory();
+        }
+        return instance;
+    }
+
+    public Flyable newAircraft(String type, String name, Coordinates coordinates) 
     {
         Flyable aircraft = null;
         switch (type) 

@@ -12,7 +12,7 @@ Avaj Launcher is a Java-based simulation program that models the movement of var
 
 - **Design Patterns**:
   - **Factory Pattern**: Utilized to create different types of aircraft.
-  - **Singleton Pattern**: Ensures a single instance of the weather provider for consistent weather updates across the simulation.
+  - **Singleton Pattern**: Ensures a single instance of the weather provider and aircraft factory.
   - **Observer Pattern**: Manages interactions between aircraft and the weather tower, allowing aircraft to react to weather changes.
 
 - **File-Based Input/Output**:
