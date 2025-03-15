@@ -1,7 +1,5 @@
 package avaj.sources;
 
-//singleton class that handles the weather
-
 public class WeatherProvider 
 {
     private static WeatherProvider weatherProvider;
@@ -21,9 +19,6 @@ public class WeatherProvider
     public String getCurrentWeather(Coordinates coordinates)
     {
         int sum = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
-        sum = sum - (int)(Math.random() * 25);
-        if (sum < 0)
-            sum = 0;
         return weather[sum % 4];
         
     }

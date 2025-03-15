@@ -1,6 +1,5 @@
 package avaj.sources;
 
-
 public class WeatherTower extends Tower
 {
 

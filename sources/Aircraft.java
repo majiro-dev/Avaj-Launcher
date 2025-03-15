@@ -1,7 +1,5 @@
 package avaj.sources;
 
-
-
 public class Aircraft extends Flyable
 {
     protected long id;
