@@ -20,12 +20,14 @@ public class Launcher
 
         String scenarioFile = args[0];
         BufferedReader reader = null;
+        weatherTower = new WeatherTower();
 
         try 
         {
             reader = new BufferedReader(new FileReader(scenarioFile));
             if (!readScenario(reader)) 
                 return;
+            reader.close();
         
             File outputFolder = new File("output");
             if (!outputFolder.exists()) 
@@ -33,70 +35,54 @@ public class Launcher
 
             for (int i = 0; i < simulations; i++) 
                 weatherTower.changeWeather();
-
-            reader.close();
         }
 
-        catch (IOException e) 
+        catch (Exception e)
         {
             System.out.println("Error: " + e.getMessage());
             return;
         }
     }
 
-    private static boolean readScenario(BufferedReader reader) throws IOException 
+    private static boolean readScenario(BufferedReader reader)
     {
         String line;
         List <Flyable> flyables = new ArrayList<Flyable>();
-        int lineCount = 0;
-        weatherTower = new WeatherTower();
         AircraftFactory aircraftFactory = AircraftFactory.getInstance();
-        while ((line = reader.readLine()) != null) 
+
+        try
         {
-            if (lineCount == 0 && !line.matches("\\d+")) 
+            simulations = Integer.parseInt(reader.readLine());
+            while ((line = reader.readLine()) != null) 
             {
-                System.out.println("First line must be a positive integer");
-                return false;
-            }
-            else if (lineCount == 0) 
-            {
-                simulations = Integer.parseInt(line);
-                lineCount++;
-                continue;
-            }
-            String[] parts = line.split(" ");
-            if (parts.length == 5) 
-            {
-                if (!parts[0].matches("Baloon|JetPlane|Helicopter")) 
+                String[] parts = line.split(" ");
+                if (parts.length == 5) 
                 {
-                    System.out.println("Invalid aircraft type: " + parts[0]);
-                    return false;
+                    if (!parts[0].matches("Baloon|JetPlane|Helicopter")) 
+                        throw new Exception("Invalid aircraft type: " + parts[0]);
+                    String type = parts[0];
+                    String name = parts[1];
+                    int longitude = Integer.parseInt(parts[2]);
+                    int latitude = Integer.parseInt(parts[3]);
+                    int height = Integer.parseInt(parts[4]);
+                    if (height < 0 || height > 100)
+                        throw new Exception("Invalid height for: " + name + " " + type);
+                    Coordinates coordinates = new Coordinates(longitude, latitude, height);
+                    Flyable aircraft = aircraftFactory.newAircraft(type, name, coordinates);
+                    flyables.add(aircraft);
                 }
-                if (!parts[2].matches("\\d+") || !parts[3].matches("\\d+") || !parts[4].matches("\\d+")) 
-                {
-                    System.out.println("Invalid coordinates: " + parts[2] + ", " + parts[3] + ", " + parts[4]);
-                    return false;
-                }
-                String type = parts[0];
-                String name = parts[1];
-                int longitude = Integer.parseInt(parts[2]);
-                int latitude = Integer.parseInt(parts[3]);
-                int height = Integer.parseInt(parts[4]);
-                Coordinates coordinates = new Coordinates(longitude, latitude, height);
-                Flyable aircraft = aircraftFactory.newAircraft(type, name, coordinates);
-                flyables.add(aircraft);
+                else 
+                    throw new Exception("Invalid line: " + line);
             }
-            else 
-            {
-                System.out.println("Invalid line: " + line);
-                return false;
-            }
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error: " + e.getMessage());
+            return false;
         }
 
         for (Flyable aircraft : flyables) 
-        {
             aircraft.registerTower(weatherTower);
-        }
         return true;
     }
 
