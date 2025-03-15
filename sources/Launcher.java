@@ -49,7 +49,6 @@ public class Launcher
     private static boolean readScenario(BufferedReader reader) throws IOException 
     {
         String line;
-        AircraftFactory factory = AircraftFactory.getInstance();
         List <Flyable> flyables = new ArrayList<Flyable>();
         weatherTower = new WeatherTower();
         int lineCount = 0;
@@ -85,7 +84,7 @@ public class Launcher
                 int latitude = Integer.parseInt(parts[3]);
                 int height = Integer.parseInt(parts[4]);
                 Coordinates coordinates = new Coordinates(longitude, latitude, height);
-                Flyable aircraft = factory.newAircraft(type, name, coordinates);
+                Flyable aircraft = AircraftFactory.newAircraft(type, name, coordinates);
                 flyables.add(aircraft);
             }
             else 
