@@ -25,8 +25,11 @@ public class Launcher
         try 
         {
             reader = new BufferedReader(new FileReader(scenarioFile));
-            if (!readScenario(reader)) 
+            if (!readScenario(reader))
+            {
+                reader.close();
                 return;
+            }
             reader.close();
         
             File outputFolder = new File("output");
