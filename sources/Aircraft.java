@@ -18,4 +18,12 @@ public class Aircraft extends Flyable
     {
         // todo
     }
+
+    @Override
+    public void registerTower(WeatherTower weatherTower)
+    {
+        super.registerTower(weatherTower);
+        String message = "Tower says: " + this.getClass().getSimpleName() + "#" + name + "(" + id + ") registered to weather tower.";
+        Launcher.printToOutput(message, true);
+    }
 }
