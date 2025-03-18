@@ -33,14 +33,12 @@ public class Helicopter extends Aircraft
                 break;
         }
 
-        if (coordinates.getHeight() > 100)
-            coordinates = new Coordinates(coordinates.getLongitude(), coordinates.getLatitude(), 100);
-
         Launcher.printToOutput(message, true);
 
         if (coordinates.getHeight() <= 0)
         {
             message = "Helicopter#" + name + "(" + id + "): " + "landing.";
+            message += " Coordinates: " + coordinates.getLongitude() + " " + coordinates.getLatitude() + " " + coordinates.getHeight();
             Launcher.printToOutput(message, true);
             message = "Tower says: Helicopter#" + name + "(" + id + ") unregistered from weather tower.";
             weatherTower.unregister(this);
@@ -49,12 +47,4 @@ public class Helicopter extends Aircraft
 
     }
 
-    @Override
-    public void registerTower(WeatherTower weatherTower)
-    {
-        this.weatherTower = weatherTower;
-        weatherTower.register(this);
-        String message = "Tower says: Helicopter#" + name + "(" + id + ") registered to weather tower.";
-        Launcher.printToOutput(message, true);
-    }
 }
