@@ -24,6 +24,10 @@ public class Launcher
 
         try 
         {
+            File outputFolder = new File("output");
+            if (!outputFolder.exists()) 
+                outputFolder.mkdir();
+            
             reader = new BufferedReader(new FileReader(scenarioFile));
             if (!readScenario(reader))
             {
@@ -32,9 +36,6 @@ public class Launcher
             }
             reader.close();
         
-            File outputFolder = new File("output");
-            if (!outputFolder.exists()) 
-                outputFolder.mkdir();
 
             for (int i = 0; i < simulations; i++) 
                 weatherTower.changeWeather();
