@@ -18,3 +18,14 @@ run:
 	java -cp $(CLASS_DIR) avaj.sources.Launcher scenarios/$(SCENARIO)
 
 re: fclean all run
+
+runall:
+	for scenario in scenarios/*.txt; do \
+		echo "Running $$scenario"; \
+		java -cp $(CLASS_DIR) avaj.sources.Launcher $$scenario; \
+		mv output/simulation.txt output/`basename $$scenario`; \
+	done
+
+reall: fclean all runall
+
+.PHONY: all clean fclean run re runall
