@@ -1,4 +1,4 @@
-package avaj.sources;
+package sources;
 
 public abstract class Flyable
 {

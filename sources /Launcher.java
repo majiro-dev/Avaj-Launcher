@@ -1,4 +1,4 @@
-package avaj.sources;
+package sources;
 
 import java.io.*;
 import java.util.ArrayList;

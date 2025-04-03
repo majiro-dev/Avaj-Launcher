@@ -8,21 +8,22 @@ all:
 	javac -d $(CLASS_DIR) @sources.txt
 
 clean:
-	rm -rf output/*
+	rm -rf output/
 
 fclean: clean
 	rm -rf $(CLASS_DIR)
 	rm -rf sources.txt
+	rm -rf */*.class
 
 run:
-	java -cp $(CLASS_DIR) avaj.sources.Launcher scenarios/$(SCENARIO)
+	java -cp $(CLASS_DIR) sources.Launcher scenarios/$(SCENARIO)
 
 re: fclean all run
 
 runall:
 	for scenario in scenarios/*.txt; do \
 		echo "Running $$scenario"; \
-		java -cp $(CLASS_DIR) avaj.sources.Launcher $$scenario; \
+		java -cp $(CLASS_DIR) sources.Launcher $$scenario; \
 		mv output/simulation.txt output/`basename $$scenario`; \
 	done
 
